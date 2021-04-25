@@ -1,0 +1,25 @@
+pipeline {
+    agent any 
+    stages {
+        stage('Test') {
+            agent {
+	      dockerfile {
+                dir "web"
+              }
+            }
+            steps {
+                sh "pytest -v tests/"
+            }
+        }
+     #   stage('Test') { 
+     #       steps {
+     #           // 
+     #       }
+     #   }
+     #  stage('Deploy') { 
+     #       steps {
+     #           // 
+     #       }
+     #   }
+    }
+}

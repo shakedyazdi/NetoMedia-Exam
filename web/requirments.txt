@@ -1,0 +1,5 @@
+#Packages to install:
+
+flask==1.1.2
+cpu-load-generator==1.0.2
+pytest==6.2.3

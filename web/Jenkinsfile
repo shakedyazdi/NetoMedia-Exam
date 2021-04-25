@@ -4,21 +4,50 @@ pipeline {
         stage('Test') {
             agent {
 	      dockerfile {
+		filename 'Dockerfile.build
                 dir "web"
               }
+	      } 
             }
             steps {
-                sh "pytest -v tests/"
+                try {
+                  sh "pytest -v tests/"
+	        } catch(Exception err) {
+			echo "test failed"
+			currentBuild.result = 'Failed' 	
+		}
+              }
             }
         }
+<<<<<<< HEAD
      //   stage('Test') { 
      //       steps {
      //           // 
+=======
+        stage('Build') { 
+		   environment {
+                GC_KEY = 'shaked'
+                google_project_id = 'shaked-311109'
+                image_name = 'web'
+		}
+            steps {
+                  dir("web") {
+		      sh "docker build -t eu.gcr.io/${google_project_id}/$image_name}:${BUILD_NUMBER} ."
+                      sh "docker push eu.gcr.io/${google_project_id}/${image_name}:${BUILD_NUMBER}"
+                  }
+              }
+>>>>>>> 98601a7... change jenkinsfile
      //       }
      //   }
      //   stage('Deploy') { 
      //       steps {
+<<<<<<< HEAD
      //           // 
+=======
+		
+     //           // //agent {
+   //}
+>>>>>>> 98601a7... change jenkinsfile
      //       }
      //   }
     }

@@ -19,7 +19,8 @@ pipeline {
                   }
               }
             }
-        }
+}
+        
         stage('Build') { 
 		    environment {
                  GC_KEY = 'shaked'
@@ -32,3 +33,6 @@ pipeline {
                   sh "docker push eu.gcr.io/${google_project_id}/${image_name}:${BUILD_NUMBER}"
                  }
                }
+	}
+
+

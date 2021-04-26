@@ -1,13 +1,13 @@
 pipeline {
     agent any 
-    stages {
-        stage('Test') {
+      stages {
+        stages('Test') {
             agent {
 	            dockerfile {
 		          filename 'Dockerfile.build'
                   	  dir "web"
                   }
-	          } 
+	        } 
             }
             steps {
                 try {
@@ -18,7 +18,7 @@ pipeline {
 			    currentBuild.result = 'Failed' 	
                   }
               }
-        stage('Build') { 
+        stages('Build') { 
 		         environment {
                     GC_KEY = 'shaked'
                     google_project_id = 'shaked-311109'
@@ -33,4 +33,3 @@ pipeline {
             }
          }
       }
-}

@@ -14,6 +14,10 @@ def intense():
     load_all_cores(duration_s=30, target_load=0.95)
     return "Got You!"
 
+@app.route("/shaked")
+def shaked():
+    return "hello shaked"
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
 

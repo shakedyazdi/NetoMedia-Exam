@@ -18,14 +18,11 @@ pipeline {
 			    currentBuild.result = 'Failed' 	
                   }
               }
-            }
-}
-        
         stage('Build') { 
-		    environment {
-                 GC_KEY = 'shaked'
-                 google_project_id = 'shaked-311109'
-                 image_name = 'web'
+		         environment {
+                    GC_KEY = 'shaked'
+                    google_project_id = 'shaked-311109'
+                    image_name = 'web'
 		        }
             steps {
                 dir("web") {
@@ -33,6 +30,7 @@ pipeline {
                   sh "docker push eu.gcr.io/${google_project_id}/${image_name}:${BUILD_NUMBER}"
                  }
                }
-	}
-
+            }
+         }
+      }
 

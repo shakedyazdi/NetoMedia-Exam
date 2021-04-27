@@ -9,12 +9,14 @@ pipeline {
                   }
 	          } 
               steps {
-                  try {
-                    sh "pytest -v tests/"
-                  }
-	              catch(Exception err) {
-			          echo "test failed"
-			          currentBuild.result = 'Failed' 	
+                  script{
+                       try {
+                         sh "pytest -v tests/"
+                       }
+                       catch(Exception e) {
+                           echo "test failed"
+			               currentBuild.result = 'Failed' 
+                       }
                   }
               }
           }
@@ -26,7 +28,7 @@ pipeline {
 		      }
               steps {
                   dir("web") {
-		    sh "docker build -t eu.gcr.io/${google_project_id}/${image_name}:${BUILD_NUMBER} ."
+		            sh "docker build -t eu.gcr.io/${google_project_id}/${image_name}:${BUILD_NUMBER} ."
                     sh "docker push eu.gcr.io/${google_project_id}/${image_name}:${BUILD_NUMBER}"
                   }
               }
